@@ -16,8 +16,6 @@ The build targets older Windows versions (e.g., Windows 7/8) that do not ship wi
 
   * `--with-ca-bundle='C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt'`
 
----
-
 ## 1. Install Docker (Debian 13)
 
 ```sh
@@ -25,13 +23,9 @@ sudo apt-get update
 sudo apt-get install docker.io docker-cli --no-install-recommends -y
 ```
 
----
-
 ## 2. Get the Dockerfile
 
 You may clone this repository or download `Dockerfile.mingw` directly.
-
----
 
 ## 3. Build with Dockerfile
 
@@ -43,8 +37,6 @@ sudo docker build -t aria2-mingw - < Dockerfile.mingw
 
 This will download dependencies and compile aria2 inside a container.
 
----
-
 ## 4. Export the compiled aria2c.exe
 
 ```sh
@@ -53,8 +45,6 @@ sudo docker run --rm -it -v /path/to/dest:/out aria2-mingw \
 ```
 
 The file `/path/to/dest/aria2c.exe` will be your final Windows binary.
-
----
 
 ## 5. CA Certificates
 
@@ -95,8 +85,6 @@ curl -o /path/to/ca-bundle.crt https://curl.se/ca/cacert.pem
      ```
 
 This ensures HTTPS connections are verified correctly even on systems without Git for Windows installed.
-
----
 
 ## License
 
