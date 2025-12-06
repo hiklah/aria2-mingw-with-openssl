@@ -64,27 +64,37 @@ By default, `aria2c.exe` uses the **CA certificate bundle** provided by **Git fo
 C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt
 ```
 
-This allows HTTPS connections to work correctly on Windows systems without native TLS 1.3 support.
+This ensures HTTPS connections work correctly on Windows systems without native TLS 1.3 support.
 
 ### Custom CA Certificate Location
 
-If `aria2c.exe` is **not run from Git for Windows**, you need to specify the CA certificate location manually. There are two ways to do this:
+If Git for Windows is **not installed**, `aria2c.exe` will not have a default CA certificate bundle. In this case, you need to provide one manually. You can download a CA certificate bundle from sources such as [curl's CA bundle](https://curl.se/docs/caextract.html) and then tell aria2c where to use it.
 
-1. **Download a certificate bundle** (for example, from [curl's CA bundle](https://curl.se/docs/caextract.html)):
+The steps are:
+
+1. **Download a CA certificate bundle**:
 
 ```sh
 curl -o /path/to/ca-bundle.crt https://curl.se/ca/cacert.pem
 ```
 
-2. **Specify the CA bundle in aria2 configuration**:
+2. **Specify the CA bundle for aria2c**
 
-Add the following line to your `aria2.conf`:
+   You can do this either:
 
-```
-ca-cert=/path/to/ca-bundle.crt
-```
+   * **Via command-line argument**:
 
-This overrides the built-in default path and ensures HTTPS connections are verified correctly.
+     ```sh
+     aria2c --ca-certificate=/path/to/ca-bundle.crt [other options]
+     ```
+
+   * **Or in the configuration file** (`aria2.conf`):
+
+     ```
+     ca-cert=/path/to/ca-bundle.crt
+     ```
+
+This ensures HTTPS connections are verified correctly even on systems without Git for Windows installed.
 
 ---
 
